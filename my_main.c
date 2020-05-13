@@ -71,6 +71,20 @@ void first_pass() {
   extern int num_frames;
   extern char name[128];
 
+  int i;
+  for (i=0; i<lastop; i++) {
+    printf("%d\n", op[i].opcode);
+    switch (op[i].opcode) {
+
+      case FRAMES:
+        num_frames = op[i].op.frames.num_frames;
+        break;
+
+      case BASENAME:
+        strcpy(name, op[i].op.basename.p->name);
+        break;
+    }
+  }
 }
 
 /*======== struct vary_node ** second_pass() ==========
@@ -108,6 +122,8 @@ void my_main() {
   struct vary_node ** knobs;
   struct vary_node * vn;
   first_pass();
+  printf("frames: %d\n", num_frames);
+  printf("basename: %s\n", name);
   knobs = second_pass();
   char frame_name[128];
   int f;
