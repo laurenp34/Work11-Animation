@@ -791,6 +791,7 @@ int main(int argc, char **argv) {
   yyin = fopen(argv[1],"r");
 
   yyparse();
+  //print_symtab();
   //COMMENT OUT PRINT_PCODE AND UNCOMMENT
   //MY_MAIN IN ORDER TO RUN YOUR CODE
 
