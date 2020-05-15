@@ -331,9 +331,6 @@ void my_main() {
           zval = op[i].op.move.d[2];
           printf("Move: %6.2f %6.2f %6.2f",
                  xval, yval, zval);
-          if (op[i].op.move.p != NULL) {
-            printf("\tknob: %s",op[i].op.move.p->name);
-          }
           tmp = make_translate( xval, yval, zval );
           matrix_mult(peek(systems), tmp);
           copy_matrix(tmp, peek(systems));
@@ -345,10 +342,6 @@ void my_main() {
           zval = op[i].op.scale.d[2];
           printf("Scale: %6.2f %6.2f %6.2f",
                  xval, yval, zval);
-          if (op[i].op.scale.p != NULL) {
-            printf("\tknob: %s",op[i].op.scale.p->name);
-            //printf("\tknob: %s",op[i].op.scale.p->name);
-          }
           tmp = make_scale( xval, yval, zval );
           matrix_mult(peek(systems), tmp);
           copy_matrix(tmp, peek(systems));
@@ -359,9 +352,6 @@ void my_main() {
           printf("Rotate: axis: %6.2f degrees: %6.2f",
                  op[i].op.rotate.axis,
                  theta);
-          if (op[i].op.rotate.p != NULL) {
-            printf("\tknob: %s",op[i].op.rotate.p->name);
-          }
 
           if (op[i].op.rotate.axis == 0 )
             tmp = make_rotX( theta );
@@ -407,7 +397,7 @@ void my_main() {
       clear_zbuffer(zb);
 
       //set symtab knob values
-      vn = malloc(sizeof(struct vary_node));
+      //vn = malloc(sizeof(struct vary_node));
       vn = knobs[f];
       //go through each knob in frame index of knobs
       while (vn) {
@@ -523,6 +513,10 @@ void my_main() {
                    xval, yval, zval);
             if (op[i].op.move.p != NULL) {
               printf("\tknob: %s",op[i].op.move.p->name);
+              //find knob value and modify matrix
+              xval *= lookup_symbol(op[i].op.move.p->name)->s.value;
+              yval *= lookup_symbol(op[i].op.move.p->name)->s.value;
+              zval *= lookup_symbol(op[i].op.move.p->name)->s.value;
             }
             tmp = make_translate( xval, yval, zval );
             matrix_mult(peek(systems), tmp);
@@ -538,6 +532,10 @@ void my_main() {
             if (op[i].op.scale.p != NULL) {
               printf("\tknob: %s",op[i].op.scale.p->name);
               //printf("\tknob: %s",op[i].op.scale.p->name);
+              //find knob value and modify matrix
+              xval *= lookup_symbol(op[i].op.scale.p->name)->s.value;
+              yval *= lookup_symbol(op[i].op.scale.p->name)->s.value;
+              zval *= lookup_symbol(op[i].op.scale.p->name)->s.value;
             }
             tmp = make_scale( xval, yval, zval );
             matrix_mult(peek(systems), tmp);
@@ -550,7 +548,9 @@ void my_main() {
                    op[i].op.rotate.axis,
                    theta);
             if (op[i].op.rotate.p != NULL) {
-              printf("\tknob: %s",op[i].op.rotate.p->name);
+              printf("\tknob: %s\n",op[i].op.rotate.p->name);
+              //find knob value and modify matrix
+              theta *= lookup_symbol(op[i].op.rotate.p->name)->s.value;
             }
 
             if (op[i].op.rotate.axis == 0 )
