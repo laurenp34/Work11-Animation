@@ -227,6 +227,13 @@ void my_main() {
 
   //if not an animation, follow regular steps
   if (num_frames == 0) {
+    printf("no amination \n");
+
+    systems = new_stack();
+    tmp = new_matrix(4, 1000);
+    clear_screen( t );
+    clear_zbuffer(zb);
+
     for (i=0;i<lastop;i++) {
 
       printf("%d: ",i);
@@ -548,7 +555,7 @@ void my_main() {
                    op[i].op.rotate.axis,
                    theta);
             if (op[i].op.rotate.p != NULL) {
-              printf("\tknob: %s\n",op[i].op.rotate.p->name);
+              printf("\tknob: %s",op[i].op.rotate.p->name);
               //find knob value and modify matrix
               theta *= lookup_symbol(op[i].op.rotate.p->name)->s.value;
             }
