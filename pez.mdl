@@ -1,0 +1,57 @@
+frames 50
+basename pez
+constants shiny_purple 0.3 0.2 0.8 0.3 0 0 0.3 0.2 0.8
+constants shiny_teal 0.3 0.0 0.0 0.3 0.2 0.8 0.3 0.2 0.8
+constants shiny_green 0.0 0.0 0.0 0.3 0.2 0.8 0.0 0.0 0.0
+constants dull_pink 0.3 0.8 0.2 0.2 0.7 0.1 0.2 0.7 0.1
+constants dull_yellow 0.3 0.8 0.2 0.3 0.8 0.2 0 0 0
+constants glossy_pink 0.5 0.8 0.8 0 0.5 0.8 0.5 0.8 0.8
+constants glossy_blue 0 0.5 0.8 0.3 0.6 0.8 0.9 0.8 0.8
+
+push
+move 300 250 0
+rotate x 30
+rotate y 30
+box glossy_blue -30 100 20 60 250 40
+box glossy_blue -55 -150 30 85 5 60
+
+push
+move 0 -105 20
+box shiny_purple -25 10 5 45 10 5
+box shiny_purple -25 40 5 10 30 5
+box shiny_purple 0 40 5 10 30 5
+box shiny_purple -25 40 5 25 10 5
+
+box shiny_purple -25 70 5 45 10 5
+box shiny_purple -25 100 5 10 30 5
+box shiny_purple 10 100 5 10 30 5
+box shiny_purple -7 96 5 10 26 5
+
+box shiny_purple -25 160 5 10 40 5
+box shiny_purple 10 160 5 10 40 5
+push
+move -15 160 5
+rotate z -48.814
+box shiny_purple -10 0 0 53.15 10 5
+pop
+pop
+
+push
+move -10 125 0
+rotate z -45 head_spin
+move 10 10 0 head_open
+sphere shiny_green 0 0 0 60
+sphere dull_yellow 0 55 25 20
+sphere dull_yellow 0 55 -25 20
+sphere shiny_purple -10 55 25 15
+sphere shiny_purple -10 55 -25 15
+pop
+
+push
+move -10 85 0
+move -100 0 0 pez_out
+box glossy_pink -30 -20 19 60 20 40
+
+vary head_spin 0 29 0 1
+vary head_open 0 29 0 1
+vary pez_out 30 49 0 1
